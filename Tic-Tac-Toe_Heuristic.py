@@ -1,3 +1,5 @@
+
+  
 #AUTHOR#SUDHANVA PATURKAR
 #TIC-TAC-TOE PROBLEM using Heuristic Search(Steepest Ascend Hill Climbing)
 def printBoard(board,hval):
@@ -25,20 +27,19 @@ def getHeuristic(temp):
         o=i.count("O")
         b=i.count("-")
         if(x==3):
-            sum+=100
+            sum+=1000
         elif(x==2 and b==1):
             sum+=10
         elif(x==1 and b==2):
             sum+=1
         elif(o==3):
-            sum-=100
+            sum-=1000
         elif(o==2 and b==1):
-            sum-=10
+            sum-=100
         elif(o==1 and b==2):
             sum-=1
         elif(b==3 or (x==1 and o==1)):
             sum+=0
-
     return sum
 
 
@@ -53,10 +54,12 @@ def getNextTurn(currentBoard):
     resTurn=[]
     Mhv=-9999
     for y,x in possibleBoards.items():
+        # print("----------------------")
+        # printBoard(x,y)
+        # print("----------------------")
         if y>Mhv:
             Mhv=y
             resTurn=x
-    
     return resTurn,Mhv
     
 board=["-","-","-","-","-","-","-","-","-"]
@@ -69,11 +72,16 @@ while(win==0):
         print("Invalid Position")
         continue
     board[pos]="O"
-    board,hv=getNextTurn(board)
-    printBoard(board,hv)
-    if hv>=100:
-        win=1
-        print("AI WINS!")
-    if(hv<=-100):
-        win=1
-        print("YOU WIN!")
+    if board.count("-")==0:
+        print("DRAW!")
+        win=2
+    else:
+        board,hv=getNextTurn(board)
+        printBoard(board,hv)
+        if hv>=100:
+            win=1
+            print("AI WINS!")
+        if(hv<=-100):
+            win=1
+            print("YOU WIN!")
+
