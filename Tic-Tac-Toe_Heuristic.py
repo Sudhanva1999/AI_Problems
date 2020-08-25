@@ -1,5 +1,5 @@
 
-  
+#Need to add counter for some tic tac toe techniques. 
 #AUTHOR#SUDHANVA PATURKAR
 #TIC-TAC-TOE PROBLEM using Heuristic Search(Steepest Ascend Hill Climbing)
 def printBoard(board,hval):
