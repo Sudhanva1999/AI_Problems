@@ -1,5 +1,3 @@
-
-#Need to add counter for some tic tac toe techniques. 
 #AUTHOR#SUDHANVA PATURKAR
 #TIC-TAC-TOE PROBLEM using Heuristic Search(Steepest Ascend Hill Climbing)
 def printBoard(board,hval):
@@ -13,6 +11,28 @@ def printBoard(board,hval):
     print("H-VALUE="+str(hval))
     print("-------")
 
+def isWinner(board):
+    lists1=[]
+    temp=board.copy()
+    for i in [0,3,6]:
+        lists1.append(temp[i:i+3])
+    lists1=lists1+list(map(list, zip(*lists1))) 
+    lists1.append([temp[0],temp[4],temp[8]])
+    lists1.append([temp[2],temp[4],temp[6]])
+    for i in lists1:
+            x=i.count("X")
+            o=i.count("O")
+            b=i.count("-")
+            if(x==3):
+                return 'X'
+            if(o==3):
+                return 'O'
+    if (board.count("-")==0):
+        return '-'
+    else:
+        return '--'
+
+    
 def getHeuristic(temp):
     lists=[]
     sum=0
@@ -78,10 +98,13 @@ while(win==0):
     else:
         board,hv=getNextTurn(board)
         printBoard(board,hv)
-        if hv>=100:
+        w=isWinner(board)
+        if w=='X':
+            print("AI wins!")
             win=1
-            print("AI WINS!")
-        if(hv<=-100):
+        elif w=='O':
+            print("YOU Win!")
             win=1
-            print("YOU WIN!")
-
+        elif w=='-':
+            print("its a DRAW!")
+            win=1
